@@ -12,7 +12,7 @@ const Footer = () => {
                 <img src="../../assets/images/logo.png" alt="Organo Logo"/>
             </div>
             
-            <p>Desenvolvido por Alura.</p>
+            <p>Desenvolvido por Juan.</p>
         </footer>
     );
 };
