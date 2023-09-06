@@ -1,7 +1,9 @@
 .forms {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     margin: 80px 0;
+    gap: 40px;
 }
 
 .forms form {

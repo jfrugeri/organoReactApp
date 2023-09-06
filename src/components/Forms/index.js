@@ -94,7 +94,7 @@ const Forms = (props) => {
                     aoAlterado={valor => setCorTime(valor)}
                 />
                 <Button>
-                    Criar time
+                    Criar Time
                 </Button>
             </form>
         </section>

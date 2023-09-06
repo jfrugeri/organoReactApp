@@ -13,7 +13,7 @@
 .footer .iconesContainer {
     display: flex;
     width: 200px;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: 18px;
 }
 
