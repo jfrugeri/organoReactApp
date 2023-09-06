@@ -1,70 +1,91 @@
+import React, { useState } from 'react';
 import Banner from './components/Banner';
 import Footer from './components/Footer';
 import Forms from './components/Forms';
 import Time from './components/Time';
-import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
-  
-  const times = [
-    {
+    const [times, setTimes] = useState([
+          {
+      id: uuidv4(),
       nome: "Back End Developer",
-      corPrimaria: "#57c278",
-      corSecundaria: "#d9f7e9"
+      cor: "#57c278",
     },
     {
+      id: uuidv4(),
       nome: "Front End Developer",
-      corPrimaria: "#82cffa",
-      corSecundaria: "#e8f8ff"
+      cor: "#82cffa",
     },
     {
+      id: uuidv4(),
       nome: "Data Science",
-      corPrimaria: "#a6d157",
-      corSecundaria: "#f0f8e2"
+      cor: "#a6d157",
     },
     {
+      id: uuidv4(),
       nome: "DevOps",
-      corPrimaria: "#e06b69",
-      corSecundaria: "#fde7e8"
+      cor: "#e06b69",
     },
     {
+      id: uuidv4(),
       nome: "UX e Design",
-      corPrimaria: "#db6ebf",
-      corSecundaria: "#fae9f5"
+      cor: "#db6ebf",
     },
     {
+      id: uuidv4(),
       nome: "Mobile Developer",
-      corPrimaria: "#ffba05",
-      corSecundaria: "#fff5d9"
+      cor: "#ffba05",
     },
     {
+      id: uuidv4(),
       nome: "Innovation and Management",
-      corPrimaria: "#ff8a29",
-      corSecundaria: "#ffeedf"
+      cor: "#ff8a29",
     },
-  ]
-  
-  const [colaboradores, setColaborador] = useState([])
+    ]);
 
-  const aoNovoColaboradorAdicionado = (colaborador) => {
-    setColaborador([...colaboradores, colaborador])
-  }
-  
-  return (
-    <div className="App">
-        <Banner />
-        <Forms times={times.map(time => time.nome)} aoNovoColaborador={colaborador => aoNovoColaboradorAdicionado(colaborador)}/>
-        {times.map(time => 
-        <Time 
-          key={time.nome}
-          nome={time.nome}
-          corPrimaria={time.corPrimaria}
-          corSecundaria={time.corSecundaria}
-          colaboradores={colaboradores.filter(colaborador => colaborador.time === time.nome)}
-        />)}
-        <Footer />
-    </div>
-  );
+    const [colaboradores, setColaboradores] = useState([]);
+
+    // Remove o colaborador com o userId correspondente da lista de colaboradores.
+    const aoDeletarColaborador = (userId) => {
+    
+        const novaListaColaboradores = colaboradores.filter(colaborador => colaborador.userId !== userId);
+        setColaboradores(novaListaColaboradores);
+    };
+
+    // Atualize a cor do time com o timeId correspondente.
+    const mudarCorDoTime = (cor, timeId) => {
+
+        setTimes(times.map(time => {
+            if (time.id === timeId) {
+                time.cor = cor;
+            }
+            return time;
+        }));
+    };
+
+    const aoNovoColaboradorAdicionado = (colaborador) => {
+        setColaboradores([...colaboradores, colaborador]);
+    };
+
+    return (
+        <div className="App">
+            <Banner />
+            <Forms times={times.map(time => time.nome)} aoNovoColaborador={aoNovoColaboradorAdicionado} />
+            {times.map(time => (
+                <Time
+                    key={time.id}
+                    timeId={time.id}
+                    nome={time.nome}
+                    cor={time.cor}
+                    colaboradores={colaboradores.filter(colaborador => colaborador.time === time.nome)}
+                    aoDeletar={aoDeletarColaborador}
+                    mudarCor={mudarCorDoTime}
+                />
+            ))}
+            <Footer />
+        </div>
+    );
 }
 
 export default App;
