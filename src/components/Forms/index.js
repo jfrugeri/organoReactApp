@@ -14,6 +14,9 @@ const Forms = (props) => {
     const  [imagem, setImagem] = useState('')
     const  [time, setTime] = useState('')
 
+    const  [nomeTime, setNomeTime] = useState('')
+    const  [corTime, setCorTime] = useState('')
+
     
     const savedForms = (evento) => {
         evento.preventDefault()
@@ -35,7 +38,7 @@ const Forms = (props) => {
     return (
         <section className="forms">
             <form onSubmit={savedForms}>
-                <h2>Digite as informações do colaborador no card abaixo</h2>
+                <h2>Preencha os dados para criar o card do colaborador.</h2>
                 <TextArea 
                     required={true} 
                     label="Nome" 
@@ -66,6 +69,32 @@ const Forms = (props) => {
                 />
                 <Button>
                     Criar Card
+                </Button>
+            </form>
+
+
+
+            <form onSubmit={(evento) => {
+                evento.preventDefault()
+                props.cadastrarTime({ nome: nomeTime, cor: corTime})
+            } }>
+                <h2>Preencha os dados para criar um novo time.</h2>
+                <TextArea 
+                    required
+                    label="Nome" 
+                    placeholder="Digite o nome do time"
+                    valor={nomeTime}
+                    aoAlterado={valor => setNomeTime(valor)}
+                />
+                <TextArea 
+                    required
+                    label="Cor" 
+                    placeholder="Digite a cor do time"
+                    valor={corTime}
+                    aoAlterado={valor => setCorTime(valor)}
+                />
+                <Button>
+                    Criar time
                 </Button>
             </form>
         </section>
