@@ -23,7 +23,6 @@ const Colaborador = (props) => {
             <div className='rodape'>
                 <h4>{props.nome}</h4>
                 <h5>{props.cargo}</h5>
-                <p>ID Colaborador: {props.userId}</p>
             </div>
         </div>
     );
